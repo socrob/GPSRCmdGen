@@ -95,6 +95,11 @@ spr:
 	$(SILENT) $(MAKE) release
 	$(SILENT) $(MONO) $(BIN_RELEASE)SPRTest.exe	
 
+converter:
+	$(SILENT) $(MAKE) clean
+	$(SILENT) $(MAKE) release
+	$(SILENT) $(MONO) $(BIN_RELEASE)GrammarConverters.exe	
+
 debug:
 	$(SILENT) $(XBUILD) $(DEBUG) $(SOLUTION)
 
