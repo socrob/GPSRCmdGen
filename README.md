@@ -1,4 +1,4 @@
-Command Generator for @HOME
+Command Generator and Grammar Exporter for @HOME
 ============================
 
 
@@ -70,6 +70,34 @@ or
 
     mono bin/Release/EEGPSRCmdGen.exe --bulk 1000
 Generated sentences will be stored in a text files in a subdirectory named after the grammar used for command generation. QR codes are also generated.
+
+
+## Exporting Grammars
+Grammars in BNF format can be exported by building the GrammarConverter.
+To build use:
+
+    make converter
+
+To export the grammars run:
+
+    ./bin/Release/GrammarConverter.exe output_path [-w|--overwrite] [--from=(gpsr|eegpsr|spr)]
+
+One file for each available grammar is exported, the grammar name is added to output_path.
+
+When -w and --overwrite options are present, output files will be overwritten without asking.
+
+Specify --from=(gpsr|eegpsr|spr) to select which grammars to export. Default: gpsr.
+
+example:
+
+    ./GrammarConverters.exe ~/grammars/robocup_2077 -w --from=gpsr
+    
+will export ~/grammars/robocup_2077_Category_I.bnf, ~/grammars/robocup_2077_Category_II.bnf, ~/grammars/robocup_2077_Category_III.bnf
+
+The grammars content is taken from the Resourses of GPSR, EEGPSR and SPR projects.
+ :warning: Resource files are cached in the binary folders. If these resource files are changed (for example, updating Questions.xml), delete the binary folder and build from scratch.
+
+The gpsr category I grammar has been tested and compared to the command generator output. Every other grammar should be tested before use.
 
 
 ## Reuse in other competitions and projects

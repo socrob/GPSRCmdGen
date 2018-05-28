@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{506BC82C-4A67-49C4-8FE6-7EE394902C17}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RoboCup.AtHome.GrammarConverters</RootNamespace>
+    <AssemblyName>GrammarConverters</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+    <Commandlineparameters>~/gpsr_grammars/robocup_spr_2018 -w --from=spr</Commandlineparameters>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+    <Commandlineparameters>~/gpsr_grammars/robocup_gpsr_2018 -w --from=gpsr</Commandlineparameters>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\FormatSpecification.txt" />
+    <Content Include="Resources\GrammarHeader.txt" />
+    <Content Include="Resources\Category1Grammar.txt" />
+    <Content Include="Resources\Category2Grammar.txt" />
+    <Content Include="Resources\Category3Grammar.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandGenerator\CommandGenerator.csproj">
+      <Project>{0C657018-3F18-40D4-836E-2D2D0D529660}</Project>
+      <Name>CommandGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GPSRCmdGen\GPSRCmdGen.csproj">
+      <Project>{34FB033E-112E-418F-B815-ADB8EC36027C}</Project>
+      <Name>GPSRCmdGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EEGPSRCmdGen\EEGPSRCmdGen.csproj">
+      <Project>{CC113145-1565-4976-8D87-8C2D40471F2E}</Project>
+      <Name>EEGPSRCmdGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPRTest\SPRTest.csproj">
+      <Project>{348A5CFF-F80E-4E23-8192-4F2B1D82BF7A}</Project>
+      <Name>SPRTest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CommonRules.txt" />
+    <None Include="Resources\Gestures.xml" />
+    <None Include="Resources\Locations.xml" />
+    <None Include="Resources\Names.xml" />
+    <None Include="Resources\Objects.xml" />
+    <None Include="Resources\Questions.xml" />
+    <None Include="Resources\eegpsr_cat1.txt" />
+  </ItemGroup>
+</Project>
