@@ -90,7 +90,7 @@ Specify --from=(gpsr|eegpsr|spr) to select which grammars to export. Default: gp
 
 example:
 
-    ./GrammarConverters.exe ~/grammars -w --from=gpsr
+    ./GrammarConverters.exe ~/grammars/robocup_2077 -w --from=gpsr
     
 will export ~/grammars/robocup_2077_Category_I.bnf, ~/grammars/robocup_2077_Category_II.bnf, ~/grammars/robocup_2077_Category_III.bnf
 
