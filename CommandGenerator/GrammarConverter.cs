@@ -791,8 +791,34 @@ namespace RoboCup.AtHome.CommandGenerator
 		{
 			if (objects == null)
 				return;
-			
-			if (expandedWildcards.Contains("_objects"))
+
+			var aobjects = new List<string>();
+			var kobjects = new List<string>();
+			var sobjects = new List<string>();
+
+			foreach (Object o in objects.Objects)
+			{
+				Console.WriteLine("o: {0},\t o.Tier: {1},\t g.Tier: {2},\t accepted: {3}", o, o.Tier, grammar.Tier, o.Tier <= grammar.Tier);
+				if (o.Tier <= grammar.Tier)
+				{
+					switch (o.Type)
+					{
+						case ObjectType.Alike:
+							aobjects.Add(o.Name);
+							break;
+						case ObjectType.Known:
+							kobjects.Add(o.Name);
+							break;
+						case ObjectType.Special:
+							sobjects.Add(o.Name);
+							break;
+						default:
+							break;
+					}
+				}
+			}
+
+			if (expandedWildcards.Contains("_objects") && (aobjects.Count +  kobjects.Count + sobjects.Count > 0))
 			{
 				
 				FilteredWriteLine("<_objects>:");
@@ -810,44 +836,32 @@ namespace RoboCup.AtHome.CommandGenerator
 			
 			if (expandedWildcards.Contains("_objects") || expandedWildcards.Contains("_categories"))
 				BNFWriteCategoriesRule();
-
-			var aobjects = new List<string>();
-			var kobjects = new List<string>();
-			var sobjects = new List<string>();
-
-			foreach (Object o in objects.Objects)
-				switch (o.Type)
-				{
-					case ObjectType.Alike:
-						aobjects.Add(o.Name);
-						break;
-					case ObjectType.Known:
-						kobjects.Add(o.Name);
-						break;
-					case ObjectType.Special:
-						sobjects.Add(o.Name);
-						break;
-					default:
-						break;
-				}
-
-
+			
 			if (expandedWildcards.Contains("_objects") || expandedWildcards.Contains("_aobjects"))
 			{
-				FilteredWriteLine("<_aobjects>:");
-				FilteredWriteLine(string.Join("|\n", aobjects) + ";\n");
+				if (aobjects.Count > 0)
+				{
+					FilteredWriteLine("<_aobjects>:");
+					FilteredWriteLine(string.Join("|\n", aobjects) + ";\n");
+				}
 			}
 			
 			if (expandedWildcards.Contains("_objects") || expandedWildcards.Contains("_kobjects"))
 			{
-				FilteredWriteLine("<_kobjects>:");
-				FilteredWriteLine(string.Join("|\n", kobjects) + ";\n");
+				if (kobjects.Count > 0)
+				{
+					FilteredWriteLine("<_kobjects>:");
+					FilteredWriteLine(string.Join("|\n", kobjects) + ";\n");
+				}
 			}
 			
 			if (expandedWildcards.Contains("_objects") || expandedWildcards.Contains("_sobjects"))
 			{
-				FilteredWriteLine("<_sobjects>:");
-				FilteredWriteLine(string.Join("|\n", sobjects) + ";\n");
+				if (sobjects.Count > 0)
+				{
+					FilteredWriteLine("<_sobjects>:");
+					FilteredWriteLine(string.Join("|\n", sobjects) + ";\n");
+				}
 			}
 			
 		}
